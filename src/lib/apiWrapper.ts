@@ -108,6 +108,21 @@ async function createTask(token: string, newTaskData:TaskFormDataType): Promise<
     }
     return { data, error }
 }
+async function getTaskById(taskId: string): Promise<APIResponse<TaskType>> {
+    let data;
+    let error;
+    try{
+        const response = await apiClientNoAuth().get(taskEndpoint + '/' + taskId);
+        data = response.data
+    } catch(err) {
+        if (axios.isAxiosError(err)){
+            error = err.response?.data.error
+        } else {
+            error = 'Something went wrong'
+        }
+    }
+    return { data, error }
+}
 async function updateTask(token: string, taskId: string, updatedTaskData:TaskFormDataType): Promise<APIResponse<TaskType>> {
     let data;
     let error;
@@ -182,6 +197,7 @@ export {
     getMe,
     getAllTasks,
     createTask,
+    getTaskById,
     updateTask,
     deleteTask,
     deleteUserData,

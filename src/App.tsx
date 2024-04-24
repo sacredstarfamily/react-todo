@@ -9,10 +9,11 @@ import AlertMessage from './components/AlertMessage';
 import Login from './views/Login';
 import Profile from './views/Profile';
 import SignUp from './views/SignUp';
+import EditTask from './views/EditTask';
 
 function App() {
 const [isLoggedIn, setIsLoggedIn] = useState(false);
-const [currenUser, setCurrentUser] = useState<UserType|null>(null);
+const [currentUser, setCurrentUser] = useState<UserType|null>(null);
 const [alertMessage, setAlertMessage] = useState<string|undefined>(undefined);
 const [category, setCategory] = useState<CategoryType|undefined>(undefined);
 useEffect(() => {
@@ -53,10 +54,11 @@ const logUserOut = () => {
      <Container>
       { alertMessage && <AlertMessage message={alertMessage} category={category} flashMessage={flashMessage} /> }
        <Routes>
-         <Route path='/' element={<Home isLoggedIn={isLoggedIn} currentUser={currenUser} flashMessage={flashMessage} />} />
+         <Route path='/' element={<Home isLoggedIn={isLoggedIn} currentUser={currentUser} flashMessage={flashMessage} />} />
          <Route path='/login' element={<Login flashMessage={flashMessage} logUserIn={logUserIn}/> } />
          <Route path='/signup' element={<SignUp flashMessage={flashMessage} logUserIn={logUserIn}/> } />
-         <Route path='/profile' element={<Profile isLoggedIn={isLoggedIn} currentUser={currenUser} flashMessage={flashMessage} />} />
+         <Route path='/profile' element={<Profile isLoggedIn={isLoggedIn} currentUser={currentUser} flashMessage={flashMessage} />} />
+         <Route path='/edit/:taskId' element={<EditTask flashMessage={flashMessage} currentUser={currentUser} />} /> <Route path='/edit/:taskId' element={<EditTask flashMessage={flashMessage} currentUser={currentUser} />} />
        </Routes>
        </Container>
     </>
