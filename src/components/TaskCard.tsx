@@ -1,6 +1,6 @@
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import {Link} from 'react-router-dom';
+//import Button from 'react-bootstrap/Button';
+//import {Link} from 'react-router-dom';
 import { TaskType, UserType } from '../types/index';
 import {useEffect} from 'react';
 type TaskCardProps = {
@@ -8,7 +8,7 @@ type TaskCardProps = {
     currentUser: UserType|null
 }
 
-export default function TaskCard({ task, currentUser}: TaskCardProps) {
+export default function TaskCard({ task}: TaskCardProps) {
     useEffect(() => {
         console.log(task);
     }, [task]);

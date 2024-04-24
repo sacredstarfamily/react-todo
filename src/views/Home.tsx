@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { UserType, TaskType, TaskFormDataType, TaskDataFormType } from '../types/index';
+import { UserType, TaskType, TaskFormDataType, CategoryType  } from '../types/index';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -7,6 +7,15 @@ import Col from 'react-bootstrap/Col';
 import TaskCard from '../components/TaskCard';
 import TaskForm from '../components/TaskForm';
 import { getAllTasks, createTask} from '../lib/apiWrapper';
+
+
+type Sorting = {
+    idAsc: (a: TaskType, b:TaskType) => number,
+    idDesc: (a: TaskType, b:TaskType) => number,
+    titleAsc: (a: TaskType, b:TaskType) => number,
+    titleDesc: (a: TaskType, b:TaskType) => number,
+}
+
 
 type Homeprops = {
     isLoggedIn: boolean;
@@ -48,9 +57,9 @@ export default function Home({isLoggedIn, currentUser, flashMessage}:  Homeprops
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(e.target.value);
     }
-    const addNewTask = async (newTaskData:TaskDataFormType) => {
+    const addNewTask = async (newTaskData:TaskFormDataType) => {
         const token = localStorage.getItem('token');
-        const response = await createTask(token, newTaskData);
+        const response = await createTask(token!, newTaskData);
         if(response.error){
          flashMessage(response.error, 'danger')
         } else {

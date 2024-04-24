@@ -1,20 +1,20 @@
 export type UserType = {
-    id:number,
-    firstName:string,
-    lastName:string,
-    username:string,
-    email:string,
-    dateCreated:string
+    id?:number |undefined,
+    firstName?:string | undefined,
+    lastName?:string | undefined,
+    username?:string | undefined,
+    email?:string|undefined,
+    dateCreated?:string|undefined
 }
 export type UserFormDataType = {
-    first_name:string,
-    last_name:string,
-    email:string,
-    username:string,
-    password:string,
-    confirmPassword:string
+    first_name:string|undefined,
+    last_name:string|undefined,
+    email:string|undefined,
+    username:string|undefined,
+    password?:string|undefined,
+    confirmPassword?:string|undefined
 }
-export type TaskDataFormType = {
+export type TaskFormDataType = {
     title: string,
     description: string
 }

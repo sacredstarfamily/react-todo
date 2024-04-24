@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {Routes, Route} from 'react-router-dom'
 import Navigation from './components/Navigation';
 import Home from './views/Home';
 import Container from 'react-bootstrap/Container';
-import { UserType } from './types/index';
+import { UserType, CategoryType } from './types/index';
 import { getMe } from './lib/apiWrapper';
 import AlertMessage from './components/AlertMessage';
 import Login from './views/Login';

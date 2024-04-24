@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { UserType, TokenType, TaskType } from '../types/index';
+import { UserType, TokenType, TaskType, UserFormDataType, TaskFormDataType } from '../types/index';
 
 const baseURL = 'https://kekambus-tasklist.onrender.com';
 const userEndpoint = '/users';
@@ -135,8 +135,8 @@ async function updateUserData(token: string, updatedUserData:UserFormDataType): 
     let data;
     let error;
     const convertUserData = {
-        "first_name": updatedUserData.firstName,
-        "last_name": updatedUserData.lastName,
+        "first_name": updatedUserData.first_name,
+        "last_name": updatedUserData.last_name,
         "email": updatedUserData.email,
         "username": updatedUserData.username,
         "password": updatedUserData.password,

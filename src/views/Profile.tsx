@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { UserType } from '../types/index';
+import { UserType, CategoryType, UserFormDataType } from '../types/index';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -13,14 +13,14 @@ type ProfileProps = {
     flashMessage: (newMessage:string|undefined, newCategory:CategoryType|undefined) => void,
     isLoggedIn: boolean,
 }
-export default function Profile({currentUser, isLoggedIn, flashMessage}: ProfileProps){
+export default function Profile({currentUser, flashMessage}: ProfileProps){
     const [showModal, setShowModal] = useState(false);
-    const [newUserData, setNewUserData] = useState<UserType>({username: currentUser?.username, email: currentUser?.email, firstName: currentUser?.firstName, lastName: currentUser?.lastName});
+    const [newUserData, setNewUserData] = useState<UserType|null>({username: currentUser? currentUser.username : '', email: currentUser?.email, firstName: currentUser?.firstName, lastName: currentUser?.lastName, id: currentUser?.id, dateCreated: currentUser?.dateCreated});
     const openModal = () => setShowModal(true);
     const closeModal = () => setShowModal(false);
     const navigate = useNavigate();
     useEffect(() => {
-        setNewUserData({username: currentUser?.username, email: currentUser?.email, firstName: currentUser?.firstName, lastName: currentUser?.lastName})
+        setNewUserData({username: currentUser?.username, email: currentUser?.email, firstName: currentUser?.firstName, lastName: currentUser?.lastName, id: currentUser?.id, dateCreated: currentUser?.dateCreated})
     }, [currentUser])
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNewUserData({...newUserData, [event.target.name]:event.target.value })
@@ -28,7 +28,14 @@ export default function Profile({currentUser, isLoggedIn, flashMessage}: Profile
     const handleFormSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         const token = localStorage.getItem('token');
-        const response = await updateUserData(token, newUserData);
+        const updatedUserData:UserFormDataType = {
+            username: newUserData?.username,
+            email: newUserData?.email,
+            first_name: newUserData?.firstName,
+            last_name: newUserData?.lastName
+            
+        }
+        const response = await updateUserData(token!, updatedUserData);
         if (response.error){
             flashMessage(response.error, 'danger')
         } else {
@@ -38,7 +45,7 @@ export default function Profile({currentUser, isLoggedIn, flashMessage}: Profile
     }
     const handleDeleteClick = async () => {
         const token = localStorage.getItem('token');
-        const response = await deleteUserData(token);
+        const response = await deleteUserData(token!);
         if (response.error){
             flashMessage(response.error, 'danger')
         } else {
@@ -76,10 +83,10 @@ export default function Profile({currentUser, isLoggedIn, flashMessage}: Profile
         </Card>
         <Modal show={showModal} onHide={closeModal}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Delete {newUserData.firstName}?</Modal.Title>
+                    <Modal.Title>Delete {newUserData?.firstName}?</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    Are you sure you want to delete {newUserData.lastName}? This action cannot be undone.
+                    Are you sure you want to delete {newUserData?.lastName}? This action cannot be undone.
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant='secondary' onClick={closeModal}>Close</Button>
