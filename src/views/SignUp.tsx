@@ -41,7 +41,7 @@ export default function SignUp({flashMessage}: SignUpProps) {
             flashMessage(response.error, 'danger')
         } else {
             // eslint-disable-next-line prefer-const
-            //let newUser = response.data!
+            let newUser = response.data!
             flashMessage(`Congrats ${newUser.firstName} ${newUser.lastName} has been created with the username ${newUser.username}`, 'success')
             //console.log(`Congrats ${newUser.firstName} ${newUser.lastName} has been created with the username ${newUser.username}`)
         }
@@ -49,7 +49,7 @@ export default function SignUp({flashMessage}: SignUpProps) {
 
     // const disableSubmit = userFormData.password.length < 5 || userFormData.password !== userFormData.confirmPassword
     // eslint-disable-next-line no-useless-escape
-    const disableSubmit = !/^(?=.*\d)(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*[-\#\$\.\%\&\*\!\?])(?=.*[a-zA-Z]).{8,16}$/.test(userFormData.password) || userFormData.password !== confirmPassword
+    const disableSubmit = !/^(?=.*\d)(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*[-\#\$\.\%\&\*\!\?])(?=.*[a-zA-Z]).{8,16}$/.test(userFormData!.password!) || userFormData.password !== userFormData.confirmPassword
 
     return (
         <>
