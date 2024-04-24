@@ -28,8 +28,15 @@ type APIResponse<T> = {
 async function register(newUserData:UserFormDataType): Promise<APIResponse<UserType>> {
     let data;
     let error;
+    const registerData = {
+        "firstName": newUserData.first_name,
+        "lastName": newUserData.last_name,
+        "email": newUserData.email,
+        "username": newUserData.username,
+        "password": newUserData.password,
+    }
     try{
-        const response = await apiClientNoAuth().post(userEndpoint, newUserData);
+        const response = await apiClientNoAuth().post(userEndpoint, registerData);
         data = response.data
     } catch(err) {
         if (axios.isAxiosError(err)){
