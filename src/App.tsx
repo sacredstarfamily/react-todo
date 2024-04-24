@@ -58,7 +58,7 @@ const logUserOut = () => {
          <Route path='/login' element={<Login flashMessage={flashMessage} logUserIn={logUserIn}/> } />
          <Route path='/signup' element={<SignUp flashMessage={flashMessage} logUserIn={logUserIn}/> } />
          <Route path='/profile' element={<Profile isLoggedIn={isLoggedIn} currentUser={currentUser} flashMessage={flashMessage} />} />
-         <Route path='/edit/:taskId' element={<EditTask flashMessage={flashMessage} currentUser={currentUser} />} /> <Route path='/edit/:taskId' element={<EditTask flashMessage={flashMessage} currentUser={currentUser} />} />
+         <Route path='/edit/:taskId' element={<EditTask flashMessage={flashMessage} currentUser={currentUser} />} />
        </Routes>
        </Container>
     </>
