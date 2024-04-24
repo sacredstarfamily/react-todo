@@ -8,10 +8,11 @@ import { register } from '../lib/apiWrapper';
 
 
 type SignUpProps = {
-    flashMessage: (newMessage:string|undefined, newCategory:CategoryType|undefined) => void
+    flashMessage: (newMessage:string|undefined, newCategory:CategoryType|undefined) => void,
+    logUserIn: () => void,
 }
 
-export default function SignUp({flashMessage}: SignUpProps) {
+export default function SignUp({flashMessage, logUserIn}: SignUpProps) {
     const [userFormData, setUserFormData] = useState<UserFormDataType>(
         {
             first_name: '',
@@ -42,6 +43,7 @@ export default function SignUp({flashMessage}: SignUpProps) {
         } else {
             // eslint-disable-next-line prefer-const
             let newUser = response.data!
+            logUserIn();
             flashMessage(`Congrats ${newUser.firstName} ${newUser.lastName} has been created with the username ${newUser.username}`, 'success')
             //console.log(`Congrats ${newUser.firstName} ${newUser.lastName} has been created with the username ${newUser.username}`)
         }

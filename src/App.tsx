@@ -8,6 +8,7 @@ import { getMe } from './lib/apiWrapper';
 import AlertMessage from './components/AlertMessage';
 import Login from './views/Login';
 import Profile from './views/Profile';
+import SignUp from './views/SignUp';
 
 function App() {
 const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -54,6 +55,7 @@ const logUserOut = () => {
        <Routes>
          <Route path='/' element={<Home isLoggedIn={isLoggedIn} currentUser={currenUser} flashMessage={flashMessage} />} />
          <Route path='/login' element={<Login flashMessage={flashMessage} logUserIn={logUserIn}/> } />
+         <Route path='/signup' element={<SignUp flashMessage={flashMessage} logUserIn={logUserIn}/> } />
          <Route path='/profile' element={<Profile isLoggedIn={isLoggedIn} currentUser={currenUser} flashMessage={flashMessage} />} />
        </Routes>
        </Container>
